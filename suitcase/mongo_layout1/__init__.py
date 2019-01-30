@@ -87,19 +87,5 @@ class Serializer(event_model.DocumentRouter):
     def __repr__(self):
         # Display connection info in eval-able repr.
         return (f'{type(self).__name__}('
-                f'metadatastore_db={self._metadatastore_db!r}, '
-                f'asset_registry_db={self._asset_registry_db!r})')
-
-
-def _get_database(uri):
-    client = pymongo.MongoClient(uri)
-    try:
-        # Called with no args, get_database() returns the database
-        # specified in the client's uri --- or raises if there was none.
-        # There is no public method for checking this in advance, so we
-        # just catch the error.
-        return client.get_database()
-    except pymongo.errors.ConfigurationError as err:
-        raise ValueError(
-            f"Invalid client: {client} "
-            f"Did you forget to include a database?") from err
+                f'metadatastore_uri={self._metadatastore_uri!r}, '
+                f'asset_registry_uri={self._asset_registry_uri!r})')
