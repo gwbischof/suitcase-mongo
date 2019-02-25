@@ -3,6 +3,7 @@
 
 from suitcase.mongo_embedded import Serializer
 
+
 def test_export(db_factory, example_data):
     documents = example_data()
     volatile_db = db_factory()
