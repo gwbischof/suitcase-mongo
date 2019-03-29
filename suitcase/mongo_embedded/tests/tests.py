@@ -73,6 +73,7 @@ def run(example_data, serializer, permanent_db):
             for doc in doc_list:
                 run_dict[doc[0]].append(doc[1])
         else:
+            # Event/datum_pages need to be converted to event/datum lists.
             if item[0] in {'event_page', 'datum_page'}:
                 doc_list = page_to_list(*item)
                 for doc in doc_list:
@@ -88,8 +89,7 @@ def run(example_data, serializer, permanent_db):
                                 permanent_db, run_dict['start']['uid']))
 
     # Sort the event field of each dictionary. With multiple streams, the
-    # documents that don't go through the serializer don't appear to be sorted
-    # correctly.
+    # the order doesn't match for the two dictionaries.
     if len(run_dict['event']):
         run_dict['event'] = sorted(run_dict['event'],
                                    key=lambda x: x['descriptor'])
