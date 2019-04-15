@@ -359,7 +359,7 @@ class Serializer(event_model.DocumentRouter):
         #if volatile_run != permanent_run:
         #    raise IOError("Failed to move data to permanent database.")
         #else:
-        #    self._delete_run(self._volatile_db, run_uid)
+        self._delete_run(self._volatile_db, run_uid)
 
     def _delete_run(self, db, run_uid):
 
@@ -610,7 +610,7 @@ class Embedder():
         result: bool
             True if insert is successful, False if it failed.
         """
-        doc_size = len(bson.BSON.encode(doc))
+        doc_size = 1000 # len(bson.BSON.encode(doc))
         if doc_size > self._max_size:
             raise ValueError(f"Document size is too large to fit in the "
                              f"embedder. doc_size={doc_size}, "
